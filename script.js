@@ -1,7 +1,7 @@
 let doList = document.querySelector("#to-do-list");
 let addBtn = document.querySelector("#add-form button");
 let addInput = document.querySelector("#add-form input");
-
+let searchInput = document.querySelector("#search-form input");
 
 doList.addEventListener("click" , (e)=>{
     if(e.target.className == "delete-btn"){
@@ -29,6 +29,19 @@ addBtn.addEventListener("click" , (e)=>{
     addInput.value = '';
 })
 
+searchInput.addEventListener("input" , (e)=>{
+    Array.from(doList.children).forEach((element)=>{
+        if (document.querySelector("#emptyMsg")){
+            return
+        }
+        if(!element.querySelector(".title").innerText.toLowerCase().includes(e.target.value.toLowerCase())){
+            element.style.display = "none";
+        }
+        else{
+            element.style.display = "flex";
+        }
+    })
+})
 
 function createListItem(element){
     let newlist = document.createElement("li");
