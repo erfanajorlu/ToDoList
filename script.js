@@ -1,4 +1,6 @@
 let doList = document.querySelector("#to-do-list");
+let addBtn = document.querySelector("#add-form button");
+let addInput = document.querySelector("#add-form input");
 
 
 doList.addEventListener("click" , (e)=>{
@@ -14,3 +16,32 @@ doList.addEventListener("click" , (e)=>{
         }
     }
 });
+
+addBtn.addEventListener("click" , (e)=>{
+    e.preventDefault();
+    if(!addInput.value){
+        return
+    }
+    if(document.querySelector("#emptyMsg")){
+        document.querySelector("#emptyMsg").remove();
+    }
+    doList.appendChild(createListItem(addInput.value));
+    addInput.value = '';
+})
+
+
+function createListItem(element){
+    let newlist = document.createElement("li");
+    let title = document.createElement("span");
+    let deleteBtn = document.createElement("span");
+    
+    title.className = "title";
+    title.innerText = element;
+
+    deleteBtn.className = "delete-btn";
+    deleteBtn.innerText = "delete";
+
+    newlist.appendChild(title);
+    newlist.appendChild(deleteBtn);
+    return newlist;
+}
